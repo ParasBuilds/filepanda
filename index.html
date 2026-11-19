@@ -1,65 +1,123 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="FilePanda free browser-based PDF, image and ZIP tools. Merge PDFs, split PDFs, compress images and manage ZIP files.">
-  <title>FilePanda — Every File. Made Simple.</title>
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="FilePanda offers free browser-based image, PDF, ZIP and video conversion tools.">
+  <title>FilePanda — Free Online File Tools</title>
   <link rel="stylesheet" href="css/style.css">
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script defer src="js/app.js"></script>
 </head>
 <body>
-  <header>
-    <a class="brand" href="./">🐼 <span>File<b>Panda</b></span></a>
-    <nav>
-      <a href="#tools">Tools</a>
-      <a href="#about">About</a>
-      <a href="privacy.html">Privacy</a>
-    </nav>
+  <header class="header">
+    <div class="nav-container">
+      <a class="brand" href="./">
+        <span class="brand-icon">🐼</span>
+        <span>File<span class="accent">Panda</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#tools">All Tools</a>
+        <a href="#about">Why FilePanda?</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+      <a class="nav-cta" href="#tools">Explore Tools ↗</a>
+    </div>
   </header>
 
   <section class="hero">
-    <span class="eyebrow">FREE • PRIVATE • NO SIGN-UP</span>
-    <h1>Every File. <em>Made Simple.</em></h1>
-    <p>Compress images, edit PDFs and manage ZIP archives directly in your browser.</p>
-    <input id="search" type="search" placeholder="Search tools..." aria-label="Search tools">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="live-dot"></span>
+        YOUR ALL-IN-ONE FILE TOOLKIT
+      </div>
+      <h1>Every file.<br><span>Made simple.</span></h1>
+      <p>Compress, convert and organize your files with powerful tools that run right in your browser.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#tools">Explore all tools ↗</a>
+        <a class="btn btn-outline" href="#about">How it works</a>
+      </div>
+      <div class="hero-trust">
+        <span>✓ Free to use</span>
+        <span>✓ No sign-up</span>
+        <span>✓ Browser processing</span>
+      </div>
+    </div>
   </section>
 
-  <main>
-    <section id="tools">
-      <div class="section-title">
-        <h2>Explore our tools</h2>
-        <span>Choose a tool to get started</span>
+  <main class="main">
+    <section id="tools" class="tools-section">
+      <div class="section-heading">
+        <div>
+          <span class="overline">THE TOOLKIT</span>
+          <h2>All the tools you need.</h2>
+          <p>Choose a tool and get started in seconds.</p>
+        </div>
+        <span id="toolCount" class="count-pill">9 tools</span>
       </div>
-      <div id="grid" class="grid"></div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <span>⌕</span>
+          <input id="search" type="search"
+            placeholder="Search for a tool..."
+            aria-label="Search tools">
+        </div>
+        <div class="filters" id="filters">
+          <button class="filter active" data-category="all">All</button>
+          <button class="filter" data-category="image">Images</button>
+          <button class="filter" data-category="pdf">PDF</button>
+          <button class="filter" data-category="zip">ZIP</button>
+          <button class="filter" data-category="video">Video</button>
+        </div>
+      </div>
+
+      <div id="grid" class="tool-grid"></div>
     </section>
 
     <section class="workspace" id="workspace">
-      <div class="workspace-head">
+      <div class="workspace-top">
         <div>
-          <span class="eyebrow">YOUR WORKSPACE</span>
+          <span class="overline">FILE WORKSPACE</span>
           <h2 id="toolTitle">Smart Image Compressor</h2>
-          <p id="toolDesc"></p>
+          <p id="toolDesc">Reduce image size with adjustable quality.</p>
         </div>
-        <span class="privacy-pill">🔒 Browser processing</span>
+        <div class="secure-badge">🔒 Local processing</div>
       </div>
 
-      <div id="drop" class="drop" tabindex="0" role="button" aria-label="Choose files">
-        <div class="drop-icon">📁</div>
-        <strong>Drop files here or click to browse</strong>
-        <p id="fileHint">Select files to process</p>
+      <div id="drop" class="drop-zone"
+        role="button" tabindex="0"
+        aria-label="Choose files to process">
+        <div class="upload-icon">↑</div>
+        <h3>Drag & drop files here</h3>
+        <p>or click to browse from your device</p>
+        <span class="browse-label">Choose files</span>
         <input id="files" type="file" hidden>
       </div>
 
       <div id="fileList" class="file-list"></div>
       <div id="options" class="options"></div>
 
-      <div class="actions">
-        <button id="run">Process files</button>
-        <button id="reset" class="secondary">Clear</button>
+      <div class="action-row">
+        <button id="run" class="btn btn-primary">
+          <span id="runLabel">Process files</span>
+          <span>↗</span>
+        </button>
+        <button id="reset" class="btn btn-muted">Clear</button>
+      </div>
+
+      <div id="progressWrap" class="progress-wrap" hidden>
+        <div class="progress-head">
+          <span id="progressText">Processing...</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-track">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
       </div>
 
       <p id="status" role="status" aria-live="polite"></p>
@@ -67,29 +125,45 @@
     </section>
 
     <section class="about" id="about">
-      <h2>Why FilePanda?</h2>
+      <div class="section-heading">
+        <div>
+          <span class="overline">BUILT FOR EVERYONE</span>
+          <h2>Simple. Fast. Private.</h2>
+        </div>
+      </div>
       <div class="benefits">
-        <div>
-          <strong>🔐 Privacy first</strong>
-          <p>Files are processed locally in your browser by these tools.</p>
-        </div>
-        <div>
-          <strong>⚡ No account needed</strong>
-          <p>Start converting instantly without signing up.</p>
-        </div>
-        <div>
-          <strong>🌿 Lightweight</strong>
-          <p>Free static hosting and efficient browser-based utilities.</p>
-        </div>
+        <article class="benefit">
+          <div class="benefit-icon">🔐</div>
+          <h3>Your files stay yours</h3>
+          <p>Processing happens locally on your device instead of uploading files to a conversion server.</p>
+        </article>
+        <article class="benefit">
+          <div class="benefit-icon">⚡</div>
+          <h3>No account required</h3>
+          <p>Open a tool, select your files and download the result.</p>
+        </article>
+        <article class="benefit">
+          <div class="benefit-icon">✨</div>
+          <h3>One simple workspace</h3>
+          <p>Manage images, PDF documents, archives and compatible videos in one place.</p>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer>
-    © 2026 FilePanda ·
-    <a href="privacy.html">Privacy</a> ·
-    <a href="terms.html">Terms</a>
-    <p>Large files may exceed your device's available memory.</p>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <a class="brand" href="./">🐼 File<span class="accent">Panda</span></a>
+        <p>Every file. Made simple.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#tools">Tools</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 FilePanda. Built for simplicity.</div>
   </footer>
 </body>
 </html>
