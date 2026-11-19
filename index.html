@@ -1,314 +1,95 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="FilePanda - Free online file compression and conversion tools.">
-  <title>FilePanda - Free File Tools</title>
-  <style>
-    :root {
-      --green: #16a34a;
-      --dark: #14251c;
-      --bg: #f7faf8;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--dark);
-    }
-    header {
-      background: white;
-      border-bottom: 1px solid #e5eae6;
-      padding: 18px 7%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo { font-size: 26px; font-weight: 800; }
-    .logo span { color: var(--green); }
-    nav a {
-      color: #42534a;
-      text-decoration: none;
-      margin-left: 22px;
-      font-weight: 500;
-    }
-    .hero {
-      text-align: center;
-      padding: 75px 20px 45px;
-    }
-    .hero h1 {
-      font-size: clamp(34px, 5vw, 56px);
-      letter-spacing: -2px;
-      margin: 0;
-    }
-    .hero h1 span { color: var(--green); }
-    .hero p { color: #64736a; font-size: 18px; }
-    .search {
-      display: block;
-      margin: 30px auto;
-      width: min(520px, 90%);
-      padding: 17px 22px;
-      border: 1px solid #dce5de;
-      border-radius: 14px;
-      font-size: 16px;
-    }
-    .container {
-      max-width: 1150px;
-      margin: auto;
-      padding: 20px;
-    }
-    .tools {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
-      gap: 20px;
-    }
-    .tool {
-      background: white;
-      padding: 25px;
-      border: 1px solid #e4ebe5;
-      border-radius: 17px;
-      cursor: pointer;
-      transition: .2s;
-    }
-    .tool:hover {
-      transform: translateY(-4px);
-      border-color: var(--green);
-      box-shadow: 0 10px 30px #163c1810;
-    }
-    .tool h3 { margin-bottom: 8px; }
-    .tool p { color: #738078; font-size: 14px; }
-    .emoji { font-size: 31px; }
-    .workspace {
-      background: white;
-      margin: 35px 0;
-      padding: 30px;
-      border: 1px solid #e4ebe5;
-      border-radius: 18px;
-    }
-    .drop {
-      border: 2px dashed #8ac99c;
-      background: #f3fbf5;
-      padding: 45px 20px;
-      text-align: center;
-      border-radius: 14px;
-    }
-    button {
-      background: var(--green);
-      border: 0;
-      border-radius: 10px;
-      padding: 13px 22px;
-      color: white;
-      font-size: 15px;
-      cursor: pointer;
-    }
-    button:disabled { opacity: .5; cursor: not-allowed; }
-    select, input[type="number"] {
-      padding: 12px;
-      border: 1px solid #d5e3d9;
-      border-radius: 10px;
-      max-width: 100%;
-    }
-    .controls {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin: 20px 0;
-    }
-    #status { color: #4c6654; }
-    footer {
-      text-align: center;
-      color: #6b7a70;
-      padding: 40px 20px;
-    }
-    @media(max-width: 600px) {
-      nav { display: none; }
-      .workspace { padding: 16px; }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="FilePanda free browser-based PDF, image and ZIP tools. Merge PDFs, split PDFs, compress images and manage ZIP files.">
+  <title>FilePanda — Every File. Made Simple.</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script defer src="js/app.js"></script>
 </head>
 <body>
-<header>
-  <div class="logo">🐼 File<span>Panda</span></div>
-  <nav>
-    <a href="#tools">All Tools</a>
-    <a href="#workspace">Converter</a>
-    <a href="#about">About</a>
-  </nav>
-</header>
+  <header>
+    <a class="brand" href="./">🐼 <span>File<b>Panda</b></span></a>
+    <nav>
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </header>
 
-<section class="hero">
-  <h1>Every File. <span>Made Simple.</span></h1>
-  <p>Compress, convert and manage files for free.</p>
-  <input class="search" id="search"
-         placeholder="Search for a file tool...">
-</section>
-
-<main class="container">
-  <h2 id="tools">Explore FilePanda Tools</h2>
-  <div class="tools" id="toolGrid"></div>
-
-  <section class="workspace" id="workspace">
-    <h2 id="toolTitle">Image Compressor</h2>
-    <p id="toolDescription">Choose an image to begin.</p>
-    <div class="drop">
-      <p style="font-size:35px">📁</p>
-      <h3>Select your file</h3>
-      <input type="file" id="fileInput">
-    </div>
-    <div class="controls" id="options"></div>
-    <button id="processButton">Process File</button>
-    <p id="status" role="status"></p>
-    <div id="result"></div>
+  <section class="hero">
+    <span class="eyebrow">FREE • PRIVATE • NO SIGN-UP</span>
+    <h1>Every File. <em>Made Simple.</em></h1>
+    <p>Compress images, edit PDFs and manage ZIP archives directly in your browser.</p>
+    <input id="search" type="search" placeholder="Search tools..." aria-label="Search tools">
   </section>
 
-  <section id="about">
-    <h2>Why FilePanda?</h2>
-    <p>Fast, simple tools that process your files directly
-       in your browser whenever possible.</p>
-  </section>
-</main>
+  <main>
+    <section id="tools">
+      <div class="section-title">
+        <h2>Explore our tools</h2>
+        <span>Choose a tool to get started</span>
+      </div>
+      <div id="grid" class="grid"></div>
+    </section>
 
-<footer>
-  <p>© 2026 FilePanda. Every File. Made Simple.</p>
-</footer>
+    <section class="workspace" id="workspace">
+      <div class="workspace-head">
+        <div>
+          <span class="eyebrow">YOUR WORKSPACE</span>
+          <h2 id="toolTitle">Smart Image Compressor</h2>
+          <p id="toolDesc"></p>
+        </div>
+        <span class="privacy-pill">🔒 Browser processing</span>
+      </div>
 
-<script>
-const tools = [
-  ["Compress Image","image","🖼️","Reduce JPG, PNG and WebP size"],
-  ["Convert Image","image","🔄","Convert JPG, PNG and WebP"],
-  ["Resize Image","image","📐","Change image dimensions"],
-  ["Images to PDF","pdf","📄","Combine images into a PDF"],
-  ["Merge PDF","pdf","📚","Combine multiple PDF documents"],
-  ["Split PDF","pdf","✂️","Extract pages from a PDF"],
-  ["Create ZIP","zip","🗜️","Package multiple files"],
-  ["Extract ZIP","zip","📦","Extract ZIP archive contents"],
-  ["Compress Video","video","🎬","Coming in a later release"]
-];
+      <div id="drop" class="drop" tabindex="0" role="button" aria-label="Choose files">
+        <div class="drop-icon">📁</div>
+        <strong>Drop files here or click to browse</strong>
+        <p id="fileHint">Select files to process</p>
+        <input id="files" type="file" hidden>
+      </div>
 
-let active = 0;
-const grid = document.getElementById("toolGrid");
-const input = document.getElementById("fileInput");
-const options = document.getElementById("options");
-const status = document.getElementById("status");
-const result = document.getElementById("result");
+      <div id="fileList" class="file-list"></div>
+      <div id="options" class="options"></div>
 
-function renderTools(filter = "") {
-  grid.innerHTML = "";
-  tools.forEach((tool,i) => {
-    if (!tool[0].toLowerCase().includes(filter.toLowerCase())) return;
-    const card = document.createElement("div");
-    card.className = "tool";
-    card.innerHTML = `<div class="emoji">${tool[2]}</div>
-      <h3>${tool[0]}</h3><p>${tool[3]}</p>`;
-    card.onclick = () => selectTool(i);
-    grid.appendChild(card);
-  });
-}
+      <div class="actions">
+        <button id="run">Process files</button>
+        <button id="reset" class="secondary">Clear</button>
+      </div>
 
-function selectTool(i) {
-  active = i;
-  document.getElementById("toolTitle").textContent = tools[i][0];
-  document.getElementById("toolDescription").textContent = tools[i][3];
-  input.value = "";
-  input.multiple = [3,4,6].includes(i);
-  input.accept = i <= 2 ? "image/*" :
-    i === 3 ? "image/*" :
-    [4,5].includes(i) ? ".pdf,application/pdf" :
-    i === 7 ? ".zip,application/zip" :
-    i === 8 ? "video/*" : "";
-  options.innerHTML = "";
-  status.textContent = "";
-  result.innerHTML = "";
+      <p id="status" role="status" aria-live="polite"></p>
+      <div id="results" class="results"></div>
+    </section>
 
-  if (i <= 2) {
-    options.innerHTML = `
-      <label>Output:
-      <select id="format">
-        <option value="image/jpeg">JPG</option>
-        <option value="image/png">PNG</option>
-        <option value="image/webp">WebP</option>
-      </select></label>
-      <label>Quality:
-      <input id="quality" type="range" min="20" max="100" value="75">
-      </label>
-      <label>Width:
-      <input id="width" type="number" min="1" placeholder="Original">
-      </label>`;
-  }
-  document.getElementById("workspace").scrollIntoView({
-    behavior:"smooth"
-  });
-}
+    <section class="about" id="about">
+      <h2>Why FilePanda?</h2>
+      <div class="benefits">
+        <div>
+          <strong>🔐 Privacy first</strong>
+          <p>Files are processed locally in your browser by these tools.</p>
+        </div>
+        <div>
+          <strong>⚡ No account needed</strong>
+          <p>Start converting instantly without signing up.</p>
+        </div>
+        <div>
+          <strong>🌿 Lightweight</strong>
+          <p>Free static hosting and efficient browser-based utilities.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-function download(blob,name) {
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = name;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 60000);
-}
-
-async function processImage() {
-  const file = input.files[0];
-  if (!file || !file.type.startsWith("image/"))
-    throw Error("Please choose an image.");
-  const bitmap = await createImageBitmap(file);
-  try {
-    const width = Number(document.getElementById("width").value)
-      || bitmap.width;
-    if (width > 16000) throw Error("Width is too large.");
-    const height = Math.round(bitmap.height * width / bitmap.width);
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d");
-    const format = document.getElementById("format").value;
-    if (format === "image/jpeg") {
-      ctx.fillStyle = "white";
-      ctx.fillRect(0,0,width,height);
-    }
-    ctx.drawImage(bitmap,0,0,width,height);
-    const quality = Number(document.getElementById("quality").value)/100;
-    const blob = await new Promise(resolve =>
-      canvas.toBlob(resolve,format,quality));
-    if (!blob) throw Error("Image conversion failed.");
-    const ext = format.split("/")[1].replace("jpeg","jpg");
-    download(blob,"filepanda-image."+ext);
-    status.textContent =
-      `Done! ${Math.round(file.size/1024)} KB → ${Math.round(blob.size/1024)} KB`;
-  } finally {
-    bitmap.close();
-  }
-}
-
-document.getElementById("processButton").onclick = async () => {
-  status.textContent = "Processing...";
-  result.innerHTML = "";
-  try {
-    if (!input.files.length) throw Error("Select a file first.");
-    if (active <= 2) {
-      await processImage();
-    } else {
-      status.textContent =
-        "This tool is not enabled in the starter version yet.";
-    }
-  } catch(e) {
-    status.textContent = e.message;
-  }
-};
-
-document.getElementById("search").oninput = e =>
-  renderTools(e.target.value);
-
-renderTools();
-selectTool(0);
-</script>
+  <footer>
+    © 2026 FilePanda ·
+    <a href="privacy.html">Privacy</a> ·
+    <a href="terms.html">Terms</a>
+    <p>Large files may exceed your device's available memory.</p>
+  </footer>
 </body>
 </html>
