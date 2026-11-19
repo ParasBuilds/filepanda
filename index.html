@@ -5,15 +5,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1220">
-  <meta name="description" content="FilePanda - Free browser-based PDF, image, ZIP and video conversion tools.">
+  <meta name="description"
+    content="FilePanda - Free online PDF, image, ZIP and video compression and conversion tools.">
   <title>FilePanda — Every File. Made Simple.</title>
+
   <link rel="stylesheet" href="css/style.css">
 
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/fix-webm-duration@1.0.6/fix-webm-duration.js"></script>
+  <!-- PDF and ZIP processing -->
+  <script defer
+    src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script defer
+    src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <!-- WebM duration repair -->
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/fix-webm-duration@1.0.6/fix-webm-duration.js"></script>
+
+  <!-- FilePanda processing engines -->
+  <script defer src="js/video-engine.js"></script>
   <script defer src="js/app.js"></script>
 </head>
+
 <body>
   <header class="header">
     <div class="nav-container">
@@ -21,28 +33,42 @@
         <span class="brand-icon">🐼</span>
         <span>File<span class="accent">Panda</span></span>
       </a>
+
       <nav aria-label="Main navigation">
         <a href="#tools">All Tools</a>
         <a href="#about">Why FilePanda?</a>
         <a href="privacy.html">Privacy</a>
       </nav>
+
       <a class="nav-cta" href="#tools">Explore Tools ↗</a>
     </div>
   </header>
 
   <section class="hero">
     <div class="hero-glow"></div>
+
     <div class="hero-content">
       <div class="hero-badge">
         <span class="live-dot"></span>
         YOUR ALL-IN-ONE FILE TOOLKIT
       </div>
+
       <h1>Every file.<br><span>Made simple.</span></h1>
-      <p>Compress, convert and organize your files with powerful tools that run right in your browser.</p>
+
+      <p>
+        Compress, convert and organize your files with
+        powerful tools that run right in your browser.
+      </p>
+
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#tools">Explore all tools ↗</a>
-        <a class="btn btn-outline" href="#about">How it works</a>
+        <a class="btn btn-primary" href="#tools">
+          Explore all tools ↗
+        </a>
+        <a class="btn btn-outline" href="#about">
+          How it works
+        </a>
       </div>
+
       <div class="hero-trust">
         <span>✓ Free to use</span>
         <span>✓ No sign-up</span>
@@ -65,14 +91,23 @@
       <div class="toolbar">
         <div class="search-wrap">
           <span>⌕</span>
-          <input id="search" type="search" placeholder="Search for a tool..." aria-label="Search tools">
+          <input id="search"
+            type="search"
+            placeholder="Search for a tool..."
+            aria-label="Search tools">
         </div>
+
         <div class="filters" id="filters">
-          <button class="filter active" data-category="all">All</button>
-          <button class="filter" data-category="image">Images</button>
-          <button class="filter" data-category="pdf">PDF</button>
-          <button class="filter" data-category="zip">ZIP</button>
-          <button class="filter" data-category="video">Video</button>
+          <button class="filter active"
+            data-category="all">All</button>
+          <button class="filter"
+            data-category="image">Images</button>
+          <button class="filter"
+            data-category="pdf">PDF</button>
+          <button class="filter"
+            data-category="zip">ZIP</button>
+          <button class="filter"
+            data-category="video">Video</button>
         </div>
       </div>
 
@@ -84,12 +119,22 @@
         <div>
           <span class="overline">FILE WORKSPACE</span>
           <h2 id="toolTitle">Smart Image Compressor</h2>
-          <p id="toolDesc">Reduce image size with adjustable quality.</p>
+          <p id="toolDesc">
+            Reduce image size with adjustable quality.
+          </p>
         </div>
-        <div class="secure-badge">🔒 Local processing</div>
+
+        <div class="secure-badge">
+          🔒 Local processing
+        </div>
       </div>
 
-      <div id="drop" class="drop-zone" role="button" tabindex="0" aria-label="Choose files to process">
+      <div id="drop"
+        class="drop-zone"
+        role="button"
+        tabindex="0"
+        aria-label="Choose files to process">
+
         <div class="upload-icon">↑</div>
         <h3>Drag & drop files here</h3>
         <p>or click to browse from your device</p>
@@ -105,20 +150,28 @@
           <span id="runLabel">Process files</span>
           <span>↗</span>
         </button>
-        <button id="reset" class="btn btn-muted">Clear</button>
+
+        <button id="reset" class="btn btn-muted">
+          Clear
+        </button>
       </div>
 
-      <div id="progressWrap" class="progress-wrap" hidden>
+      <div id="progressWrap"
+        class="progress-wrap" hidden>
         <div class="progress-head">
           <span id="progressText">Processing...</span>
           <span id="progressPercent">0%</span>
         </div>
+
         <div class="progress-track">
           <div id="progressBar" class="progress-bar"></div>
         </div>
       </div>
 
-      <p id="status" role="status" aria-live="polite"></p>
+      <p id="status"
+        role="status"
+        aria-live="polite"></p>
+
       <div id="results" class="results"></div>
     </section>
 
@@ -129,21 +182,33 @@
           <h2>Simple. Fast. Private.</h2>
         </div>
       </div>
+
       <div class="benefits">
         <article class="benefit">
           <div class="benefit-icon">🔐</div>
           <h3>Your files stay yours</h3>
-          <p>Processing happens locally on your device instead of uploading files to a conversion server.</p>
+          <p>
+            Processing happens locally on your device
+            instead of uploading files to a conversion server.
+          </p>
         </article>
+
         <article class="benefit">
           <div class="benefit-icon">⚡</div>
           <h3>No account required</h3>
-          <p>Open a tool, select your files and download the result.</p>
+          <p>
+            Open a tool, select your files and
+            download the result.
+          </p>
         </article>
+
         <article class="benefit">
           <div class="benefit-icon">✨</div>
           <h3>One simple workspace</h3>
-          <p>Manage images, PDF documents, archives and compatible videos in one place.</p>
+          <p>
+            Manage images, PDF documents, archives
+            and compatible videos in one place.
+          </p>
         </article>
       </div>
     </section>
@@ -152,16 +217,22 @@
   <footer class="footer">
     <div class="footer-inner">
       <div>
-        <a class="brand" href="./">🐼 File<span class="accent">Panda</span></a>
+        <a class="brand" href="./">
+          🐼 File<span class="accent">Panda</span>
+        </a>
         <p>Every file. Made simple.</p>
       </div>
+
       <div class="footer-links">
         <a href="#tools">Tools</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
       </div>
     </div>
-    <div class="footer-bottom">© 2026 FilePanda. Built for simplicity.</div>
+
+    <div class="footer-bottom">
+      © 2026 FilePanda. Built for simplicity.
+    </div>
   </footer>
 </body>
 </html>
